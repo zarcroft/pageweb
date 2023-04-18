@@ -299,6 +299,7 @@ p {
     color: white;
     font-size: 17px; 
     font-family: system-ui;  
+    text-align: center;
 }
 
 .password {
