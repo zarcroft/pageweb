@@ -11,10 +11,12 @@ if(isset($_GET['search'])) {
     $search = $_GET['search'];
 }
 
-$query = "SELECT carton.id_carton, carton.content, carton.delivery_date, carton.weight, supplier.id_supplier, supplier.address, supplier.postal_code, supplier.country, supplier.city, supplier.corporate_name 
+$query = "SELECT carton.id_carton, carton.content, carton.delivery_date, carton.weight, supplier.id_supplier, supplier.address, supplier.postal_code, supplier.country, supplier.city, supplier.corporate_name, location.rack, location.row, location.line 
           FROM carton 
           INNER JOIN supplier 
           ON carton.id_supplier = supplier.id_supplier 
+          INNER JOIN location
+           ON carton.id_location = location.id_location
           WHERE 
             carton.id_carton LIKE :search OR 
             carton.content LIKE :search OR 
@@ -25,7 +27,10 @@ $query = "SELECT carton.id_carton, carton.content, carton.delivery_date, carton.
             supplier.postal_code LIKE :search OR 
             supplier.country LIKE :search OR 
             supplier.city LIKE :search OR 
-            supplier.corporate_name LIKE :search";
+            supplier.corporate_name LIKE :search OR
+            location.rack LIKE :search OR
+            location.row LIKE :search OR
+            location.line LIKE :search";
 $stmt = $dbh->prepare($query);
 $stmt->bindValue(':search', '%'.$search.'%', PDO::PARAM_STR);
 $stmt->execute();
@@ -86,6 +91,9 @@ if(isset($_POST['submit'])) {
                 <thead>
                     <tr>
                         <th>ID Carton</th>
+                        <th>Rack</th>
+                        <th>ligne</th>
+                        <th>colonne</th>
                         <th>Contenu</th>
                         <th>Date de livraison</th>
                         <th>Poids</th>
@@ -100,6 +108,9 @@ if(isset($_POST['submit'])) {
                     <?php foreach ($result as $row) { ?>
                         <tr>
                             <td><?php echo $row['id_carton']; ?></td>
+                            <td><?php echo $row['rack']; ?></td>
+                            <td><?php echo $row['line']; ?></td>
+                            <td><?php echo $row['row']; ?></td>
                             <td><?php echo $row['content']; ?></td>
                             <td><?php echo $row['delivery_date']; ?></td>
                             <td><?php echo $row['weight']; ?></td>
