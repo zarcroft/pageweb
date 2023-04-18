@@ -61,7 +61,7 @@ if(isset($_POST['submit'])) {
 
 <!DOCTYPE html>
 <html>
-<LINK href="../style/style.css" rel="stylesheet" type="text/css">
+<LINK href="../style.css" rel="stylesheet" type="text/css">
 
 <head>
     <title>user</title>
