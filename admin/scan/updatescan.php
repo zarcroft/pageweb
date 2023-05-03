@@ -1,5 +1,5 @@
 <?php
-require "../../config/configadmin.php";
+require "../../config/config.php";
 
 session_start();
 if ($_SESSION['permission'] !== "admin") {
