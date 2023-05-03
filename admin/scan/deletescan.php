@@ -5,7 +5,7 @@ if ($_SESSION['permission'] !== "admin") {
     header("Location: ../../index.php"); 
 }
 
-require "../../config/configadmin.php";
+require "../../config/config.php";
 
 $sql = "SELECT * FROM scan INNER JOIN users on scan.id_user = users.id_user";
 
