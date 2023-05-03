@@ -1,6 +1,6 @@
 <?php
 session_start(); 
-require "../config/configcarton.php";
+require "../config/config.php";
 if ($_SESSION['permission'] !== "user") {
     header("Location: ../index.php"); 
 }
