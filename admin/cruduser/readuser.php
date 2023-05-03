@@ -4,19 +4,19 @@ if ($_SESSION['permission'] !== "admin") {
     header("Location: ../../index.php"); 
 }
 
-require "../../config/configadmin.php";
+require "../../config/config.php";
 
 $search = "";
 $sort_by = "";
 $params = array();
 
 // Requête de base sans recherche ni tri
-$query = "SELECT * FROM users";
+$query = "SELECT u.*, p.permission FROM users u LEFT JOIN permission p ON u.id_permission = p.id_permission";
 
 // Si une recherche est effectuée
 if(isset($_POST['search'])) {
     $search = $_POST['search'];
-    $query = "SELECT * FROM users WHERE pseudo LIKE :search OR name LIKE :search OR firstname LIKE :search OR permission LIKE :search";
+    $query .= " WHERE u.pseudo LIKE :search OR u.name LIKE :search OR u.firstname LIKE :search OR p.permission LIKE :search";
     $params['search'] = '%' . $search . '%';
 }
 
@@ -24,16 +24,16 @@ if(isset($_POST['search'])) {
 if(isset($_GET['sort'])) {
     switch($_GET['sort']) {
         case 'pseudo':
-            $sort_by = 'pseudo ASC';
+            $sort_by = 'u.pseudo ASC';
             break;
         case 'name':
-            $sort_by = 'name ASC';
+            $sort_by = 'u.name ASC';
             break;
         case 'firstname':
-            $sort_by = 'firstname ASC';
+            $sort_by = 'u.firstname ASC';
             break;
         case 'permission':
-            $sort_by = 'permission ASC';
+            $sort_by = 'p.permission ASC';
             break;
         default:
             $sort_by = '';
