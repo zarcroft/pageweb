@@ -4,7 +4,7 @@ if ($_SESSION['permission'] !== "admin") {
     header("Location: ../../index.php"); 
 }
 
-require "../../config/configadmin.php";
+require "../../config/config.php";
 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $permissions = $dbh->query('SELECT * FROM permission');
@@ -16,12 +16,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
     $permission = $_POST['permission'];
     
-    $stmt = $dbh->prepare("INSERT INTO users (name, firstname, pseudo, password, permission) VALUES (:name, :firstname, :pseudo, :password, :permission)");
+    $stmt = $dbh->prepare("INSERT INTO users (name, firstname, pseudo, password, permission) VALUES (:name, :firstname, :pseudo, :password, :id_permission)");
     $stmt->bindParam(':name', $name);
     $stmt->bindParam(':firstname', $surname);
     $stmt->bindParam(':pseudo', $pseudo);
     $stmt->bindParam(':password', $password);
-    $stmt->bindParam(':permission', $permission);
+    $stmt->bindParam(':id_permission', $permission);
     
     if ($stmt->execute()) {
         $_SESSION['message'] = "Données utilisateur insérées avec succès";
@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <select aria-label="Default select example" name="permission" required>
                 <?php foreach ($permissions as $permission): ?>
-                    <option value="<?= $permission['permission']?>">fonction : <?= $permission['permission']?></option>
+                    <option value="<?= $permission['id_permission']?>">fonction : <?= $permission['permission']?></option>
                 <?php endforeach; ?>  
             </select>
 
