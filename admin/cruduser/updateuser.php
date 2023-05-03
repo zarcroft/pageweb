@@ -5,7 +5,7 @@ if ($_SESSION['permission'] !== "admin") {
     header("Location: ../../index.php"); 
 }
 
-require "../../config/configadmin.php";
+require "../../config/config.php";
 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $permissions = $dbh->query('SELECT * FROM permission');
@@ -26,14 +26,14 @@ if (isset($_POST['update_user'])) {
     $firstname = $_POST['firstname'];
     $pseudo = $_POST['pseudo'];
     $password = $_POST['password'];
-    $permission = $_POST['permission'];
+    $permission = $_POST['id_permission'];
 
-    $stmt = $dbh->prepare("UPDATE users SET name = :name, firstname = :firstname, pseudo = :pseudo, password = :password, permission = :permission WHERE id_user = :id_user");
+    $stmt = $dbh->prepare("UPDATE users SET name = :name, firstname = :firstname, pseudo = :pseudo, password = :password, id_permission = :id_permission WHERE id_user = :id_user");
     $stmt->bindParam(':name', $name);
     $stmt->bindParam(':firstname', $firstname);
     $stmt->bindParam(':pseudo', $pseudo);
     $stmt->bindParam(':password', $password);
-    $stmt->bindParam(':permission', $permission);
+    $stmt->bindParam(':id_permission', $permission);
     $stmt->bindParam(':id_user', $id_user);
     $stmt->execute();
 }
@@ -86,10 +86,10 @@ if (isset($_POST['update_user'])) {
         
         <div class ="box">
 
-        <select name="permission" id="permission">
+        <select name="id_permission" id="id_permission">
             <?php foreach ($permissions as $permission) {
-                echo '<option value="' . $permission['permission'] . '"';
-                if ($permission['permission'] == $selected_user['permission']) {
+                echo '<option value="' . $permission['id_permission'] . '"';
+                if ($permission['id_permission'] == $selected_user['id_permission']) {
                     echo ' selected';
                 }
                 echo '>' . $permission['permission'] . '</option>';
