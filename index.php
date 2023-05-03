@@ -8,7 +8,9 @@ if(isset($_POST['submit'])) {
     $password = $_POST['password'];
 
     // vérification des informations d'identification
-    $query = "SELECT * FROM users WHERE pseudo = ? AND password = ?";
+     $query = "SELECT users.*, permission.permission FROM users
+              JOIN permission ON users.id_permission = permission.id_permission
+              WHERE pseudo = ? AND password = ?";
     $stmt = $dbh->prepare($query);
     $stmt->execute([$pseudo, $password]);
 
