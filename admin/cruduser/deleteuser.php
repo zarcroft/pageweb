@@ -4,7 +4,7 @@ if ($_SESSION['permission'] !== "admin") {
     header("Location: ../../index.php"); 
 }
 
-require "../../config/configadmin.php";
+require "../../config/config.php";
 
 $sql = "SELECT * FROM users";
 $result = $dbh->query($sql);
