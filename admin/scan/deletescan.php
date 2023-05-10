@@ -7,7 +7,7 @@ if ($_SESSION['permission'] !== "admin") {
 
 require "../../config/config.php";
 
-$sql = "SELECT * FROM scan INNER JOIN users on scan.id_user = users.id_user";
+$sql = "SELECT * FROM scan INNER JOIN users on scan.id_user = users.id_user INNER JOIN carton on scan.id_carton = carton.id_carton";
 
 
 $result = $dbh->query($sql);
@@ -49,7 +49,7 @@ if (isset($_POST['scan'])) {
         <div class ="boxscan">
             <select class="form-select" aria-label="Default select example" name="scan" required>
                 <?php foreach ($scans as $scan): ?>
-                    <option value="<?= $scan['id_scan']?>"><?= $scan['id_scan']?>  <?= $scan['id_carton']?>  <?= $scan['dates']?>  <?= $scan['name']?> <?= $scan['firstname']?></option>
+                    <option value="<?= $scan['id_scan']?>"><?= $scan['id_scan']?>  <?= $scan['reference']?>  <?= $scan['date']?>  <?= $scan['name']?> <?= $scan['firstname']?></option>
                 <?php endforeach; ?>
             </select>
             </div>
