@@ -234,10 +234,11 @@ td {
   color: white;
   text-align: center;
   font-size: 40px;
-  margin-left : 450px;
-  margin-right : 450px;
+  margin-left : 350px;
+  margin-right : 350px;
   font-family: system-ui;
   margin-top : 200px;
+  align-self:center;
 }
 
 
@@ -246,7 +247,6 @@ td {
 }
 
 .scan button {
-  width: 100%;
   color: white;
   transition: .5s;
   font-size: 20px;
@@ -255,21 +255,22 @@ td {
   height: 45px;
   border-radius: 5px;
   background: rgb(131, 0, 207);
-  align-self: flex-end;
+  align-self: center;
   
 }
 
 
 .boxscan select {
-  background-color: rgb(131, 0, 207);
+  width: 100%;
   color: white;
-  padding: 12px;
-  border: none;
+  transition: .5s;
   font-size: 20px;
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-  -webkit-appearance: button;
-  appearance: button;
   outline: none;
+  border: none;
+  height: 55px;
+  border-radius: 5px;
+  background: rgb(131, 0, 207);
+  align-self: flex-end;
 }
 
 .boxscan select option {
@@ -298,8 +299,8 @@ a:active {
 p {
     color: white;
     font-size: 17px; 
-    font-family: system-ui;  
-    text-align: center;
+    font-family: system-ui; 
+    text-align: center; 
 }
 
 .password {
