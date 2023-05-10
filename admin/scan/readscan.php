@@ -9,7 +9,7 @@ require_once "../../config/config.php";
 
 $search = '';
 $sort_by = '';
-$query = "SELECT * FROM scan INNER JOIN users ON scan.id_user = users.id_user";
+$query = "SELECT * FROM scan INNER JOIN users ON scan.id_user = users.id_user INNER JOIN carton on scan.id_carton = carton.id_carton";
 $params = array();
 
 if(isset($_POST['search'])) {
@@ -76,8 +76,8 @@ $scans = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php foreach ($scans as $scan): ?>
             <tr>
                 <td><?= $scan['id_scan'] ?></td>
-                <td><?= $scan['id_carton'] ?></td>
-                <td><?= $scan['dates'] ?></td>
+                <td><?= $scan['reference'] ?></td>
+                <td><?= $scan['date'] ?></td>
                 <td><?= $scan['pseudo'] ?></td>
                 <td><?= $scan['name'] ?></td>
                 <td><?= $scan['firstname'] ?></td>
