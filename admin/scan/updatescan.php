@@ -18,7 +18,7 @@ try {
 if (isset($_POST['select_scan'])) {
     $selected_scan_id = $_POST['scan_id'];
     try {
-        $selected_scan_stmt = $dbh->prepare("SELECT id_scan, id_carton, id_user, dates FROM scan WHERE id_scan = :id_scan");
+        $selected_scan_stmt = $dbh->prepare("SELECT * FROM scan INNER JOIN carton on scan.id_carton = carton.id_carton WHERE id_scan = :id_scan");
         $selected_scan_stmt->bindParam(':id_scan', $selected_scan_id);
         $selected_scan_stmt->execute();
         $selected_scan = $selected_scan_stmt->fetch(PDO::FETCH_ASSOC);
@@ -32,12 +32,12 @@ if (isset($_POST['select_scan'])) {
 
 if (isset($_POST['update_scan'])) {
     $id_scan = $_POST['id_scan'];
-    $id_carton = $_POST['id_carton'];
+    $id_carton = $_POST['reference'];
     $id_user = $_POST['id_user'];
 
     try {
-        $stmt = $dbh->prepare("UPDATE scan SET id_carton = :id_carton, id_user = :id_user WHERE id_scan = :id_scan");
-        $stmt->bindParam(':id_carton', $id_carton);
+        $stmt = $dbh->prepare("UPDATE scan SET reference = :reference, id_user = :id_user WHERE id_scan = :id_scan");
+        $stmt->bindParam(':reference', $reference);
         $stmt->bindParam(':id_user', $id_user);
         $stmt->bindParam(':id_scan', $id_scan);
         $stmt->execute();
@@ -64,9 +64,9 @@ if (isset($_POST['update_scan'])) {
 
     <select name="scan_id" id="scan_id">
         <?php
-        $scans = $dbh->query('SELECT * FROM scan');
+        $scans = $dbh->query('SELECT * FROM scan INNER JOIN carton on scan.id_carton = carton.id_carton');
         foreach ($scans as $scan) {
-            echo '<option value="' . $scan['id_scan'] . '">' . $scan['id_scan'] . ' ' .$scan['id_carton'] . '</option>';
+            echo '<option value="' . $scan['id_scan'] . '">' . $scan['id_scan'] . ' ' .$scan['reference'] . '</option>';
         }
         ?>
     </select>
@@ -83,7 +83,7 @@ if (isset($_POST['update_scan'])) {
 
     <input type="hidden" name="id_scan"  value="<?php echo $selected_scan['id_scan']; ?>" >
 
-    <input type="text" name="id_carton" id="id_carton" value="<?php echo $selected_scan['id_carton']; ?>" placeholder="id_carton">
+    <input type="text" name="reference" id="reference" value="<?php echo $selected_scan['reference']; ?>" placeholder="id_carton">
 
     <div class ="box">
 
