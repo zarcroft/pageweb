@@ -24,7 +24,7 @@ if(isset($_POST['submit'])) {
         $_SESSION['permission'] = $user_role;
         $_SESSION['name'] = $name;
         $_SESSION['firstname'] = $firstname;
-
+        setcookie('pseudo', urlencode($pseudo), time() + 3600, '/');
         // redirection sur la page en fonction de leurs rôles
         if ($user_role == "admin") {
             header("Location: admin/admin.php");
