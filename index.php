@@ -25,24 +25,24 @@ if(isset($_POST['submit'])) {
         $_SESSION['name'] = $name;
         $_SESSION['firstname'] = $firstname;
         setcookie('pseudo', urlencode($pseudo), time() + 3600, '/');
-        // redirection sur la page en fonction de leurs rôles
-        if ($user_role == "admin") {
-            header("Location: admin/admin.php");
-            exit;
-        } 
-        
-        else if ($user_role == "user"){
-            header("Location: user/user.php");
+       setcookie('pseudo', urlencode($pseudo), time() + 3600, '/');
+        setcookie('permission', urlencode($user_role), time() + 3600, '/');
+
+        if ($user_role == 'admin') { 
+            header("Location: http://localhost:3000/index.js");
             exit;
         }
-        else {
-            echo "Nom d'utilisateur ou mot de passe incorrect";
-        }
+      else if ($user_role == 'user'){
+        header("Location: http://localhost:3000/index.js");
+        exit;
+      }
+      else {
+        echo "nom d'utilisateur ou mot de passe incorrect";
+      }
     }
-    else {
-        echo "Nom d'utilisateur ou mot de passe incorrect";
-    }
-}
+      else {
+        echo "nom d'utilisateur ou mot de passe incorrect";
+      }
 ?>
 
 <html>
