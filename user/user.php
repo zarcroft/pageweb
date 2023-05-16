@@ -107,7 +107,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="deco">
 
     <form method="post">
-    <button type="button" name="submit" value="Aller sur le serveur Node.js" onclick="window.location.href='drone/dronecontrol.php';">scanner un carton</button>
+    <button type="button" name="submit" value="Aller sur le serveur Node.js" onclick="window.location.href='http://localhost:3003';">scanner un carton</button>
     </form>
 
     </div>
