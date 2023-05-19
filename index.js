@@ -15,10 +15,10 @@ app.get('/user', (req, res) => {
 
   if (permission === 'admin') {
     // Rediriger l'utilisateur vers admin.php
-    res.redirect('http://localhost/logistic-drone/admin/admin.php');
+    res.redirect('http://localhost/logistic_drone/admin/admin.php');
   } else if (permission === 'user') {
     // Rediriger l'utilisateur vers user.php
-    res.redirect('http://localhost/logistic-drone/user/user.php');
+    res.redirect('http://localhost/logistic_drone/user/user.php');
   } else {
     // Gérer le cas où la permission n'est pas définie ou a une valeur inattendue
     res.send('Erreur : permission invalide');
