@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const app = express();
 app.use(cookieParser());
 
-app.get('/index.js', (req, res) => {
+app.get('/user', (req, res) => {
   // Récupérer la valeur du cookie "permission"
   const permission = req.cookies.permission;
 
@@ -15,10 +15,10 @@ app.get('/index.js', (req, res) => {
 
   if (permission === 'admin') {
     // Rediriger l'utilisateur vers admin.php
-    res.redirect('http://localhost/test-drone/admin/admin.php');
+    res.redirect('http://localhost/logistic-drone/admin/admin.php');
   } else if (permission === 'user') {
     // Rediriger l'utilisateur vers user.php
-    res.redirect('http://localhost/test-drone/user/user.php');
+    res.redirect('http://localhost/logistic-drone/user/user.php');
   } else {
     // Gérer le cas où la permission n'est pas définie ou a une valeur inattendue
     res.send('Erreur : permission invalide');
