@@ -49,7 +49,7 @@ if (isset($_POST['scan'])) {
         <div class ="boxscan">
             <select class="form-select" aria-label="Default select example" name="scan" required>
                 <?php foreach ($scans as $scan): ?>
-                    <option value="<?= $scan['id_scan']?>"><?= $scan['id_scan']?>  <?= $scan['reference']?>  <?= $scan['date']?>  <?= $scan['name']?> <?= $scan['firstname']?></option>
+                    <option value="<?= $scan['id_scan']?>">id : <?= $scan['id_scan']?> carton : <?= $scan['reference']?> le <?= $scan['date']?> par <?= $scan['name']?> <?= $scan['firstname']?></option>
                 <?php endforeach; ?>
             </select>
             </div>
