@@ -27,10 +27,7 @@ $query = "SELECT carton.id_carton, carton.content, carton.delivery_date, carton.
             supplier.postal_code LIKE :search OR 
             supplier.country LIKE :search OR 
             supplier.city LIKE :search OR 
-            supplier.corporate_name LIKE :search OR
-            location.rack LIKE :search OR
-            location.row LIKE :search OR
-            location.line LIKE :search";
+            supplier.corporate_name LIKE :search";
 $stmt = $dbh->prepare($query);
 $stmt->bindValue(':search', '%'.$search.'%', PDO::PARAM_STR);
 $stmt->execute();
@@ -65,9 +62,6 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <thead>
                     <tr>
                         <th>ID Carton</th>
-                        <th>Rack</th>
-                        <th>ligne</th>
-                        <th>colonne</th>
                         <th>Contenu</th>
                         <th>Date de livraison</th>
                         <th>Poids</th>
@@ -82,9 +76,6 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <?php foreach ($result as $row) { ?>
                         <tr>
                             <td><?php echo $row['id_carton']; ?></td>
-                            <td><?php echo $row['rack']; ?></td>
-                            <td><?php echo $row['line']; ?></td>
-                            <td><?php echo $row['row']; ?></td>
                             <td><?php echo $row['content']; ?></td>
                             <td><?php echo $row['delivery_date']; ?></td>
                             <td><?php echo $row['weight']; ?></td>
