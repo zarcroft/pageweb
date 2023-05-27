@@ -14,9 +14,9 @@ app.get('/user', (req, res) => {
 
   if (permission === 'admin') {
 
-    res.redirect('http://localhost//admin/admin.php');
+    res.redirect('http://localhost/admin/admin.php');
   } else if (permission === 'user') {
-    res.redirect('http://localhost//user/user.php');
+    res.redirect('http://localhost/user/user.php');
   } else {
     res.send('Erreur : permission invalide');
   }
